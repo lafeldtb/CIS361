@@ -1,0 +1,3 @@
+Notes for project planning
+
+-Test both functions (LList/Parser) independent of one another
