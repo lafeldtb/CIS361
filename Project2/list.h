@@ -19,7 +19,9 @@ struct SO_List {
 
 typedef struct SO_List SO_List;
 
+void initialize(SO_List *list);
 bool is_empty(SO_List *list);
 bool insert(SO_List *list, char *identifier);
-bool search(SO_List *list, char *identifier);
+Node find_id(SO_List *list, char *identifier);
+Node traverse(Node *head, char *identifier);
 char* to_string(SO_List *list);
