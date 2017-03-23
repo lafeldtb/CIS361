@@ -21,7 +21,7 @@ typedef struct SO_List SO_List;
 
 void initialize(SO_List *list);
 bool is_empty(SO_List *list);
-bool insert(SO_List *list, char *identifier);
-Node find_id(SO_List *list, char *identifier);
-Node traverse(Node *head, char *identifier);
-char* to_string(SO_List *list);
+void insert(SO_List *list, char *identifier);
+Node* find_id(SO_List *list, char *identifier);
+void print_list(SO_List *list);
+int length(SO_List *list);
