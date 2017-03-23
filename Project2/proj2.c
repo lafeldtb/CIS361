@@ -23,10 +23,14 @@ int main(int argc, char *argv[])
 
     enum STATE{IDENTIFIER, SPACE};
     enum STATE State  = SPACE;
+    
+
     char *identifier = "";
     identifier = (char*)malloc(sizeof(char)*100);
     int len;
-    bool comment = false;
+    bool line_comment = false;
+    bool block_comment = false;
+    char last;
     bool literal = false;
 
     while(!feof(fp))
@@ -34,7 +38,20 @@ int main(int argc, char *argv[])
         char ch = fgetc(fp);
         if(ch == '/')
         {
-            comment = !comment;
+            if(last == '/' && !block_comment) // "//"
+            {
+                line_comment = true;
+            } else if (last == '*' && block_comment) // "*/"
+            {
+                block_comment = false;
+            }
+        }
+        if(ch == '*')
+        {
+            if(last == '/') // /*
+            {
+                block_comment = true;
+            }
         }
         if(ch == '\"')
         {
@@ -42,12 +59,13 @@ int main(int argc, char *argv[])
         }
         if(ch == '\n')
         {
-            comment = false;
+            if(!block_comment)
+                line_comment = false;
             literal = false;
         }
         switch (State) {
             case SPACE:
-                if((isalpha(ch) != 0 || ch == '_') && !comment && !literal)
+                if((isalpha(ch) != 0 || ch == '_') && !line_comment && !block_comment && !literal)
                 {
                     len = strlen(identifier);
                     identifier[len] = ch;
@@ -68,6 +86,7 @@ int main(int argc, char *argv[])
                 }
                 break;
         }
+        last = ch;
     }
     fclose(fp);
 
