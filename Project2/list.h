@@ -1,3 +1,10 @@
+/*************************************************
+A Self-organizing list
+
+Author: Benjamin LaFeldt
+Grand Valley State University
+CIS 361
+*************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

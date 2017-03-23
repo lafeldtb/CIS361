@@ -1,3 +1,10 @@
+/*************************************************
+A Self-organizing list
+
+Author: Benjamin LaFeldt
+Grand Valley State University
+CIS 361
+*************************************************/
 #include "list.h"
 
 void insert_node(Node *head, char *identifier);

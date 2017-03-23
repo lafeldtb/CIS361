@@ -1,3 +1,10 @@
+/*************************************************
+Test file for self-organizing list
+
+Author: Benjamin LaFeldt
+Grand Valley State University
+CIS 361
+*************************************************/
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -16,6 +23,7 @@ int main(int argc, char *argv[])
     print_list(list);
     insert(list, "TestC");
     print_list(list);
+    printf("Length: %d", length(list));
 
     return 0;
 }

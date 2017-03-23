@@ -1,3 +1,11 @@
+/*************************************************
+Implementation of A Self-organizing list
+Reads in passed file and outputs the complete self-organizing list
+
+Author: Benjamin LaFeldt
+Grand Valley State University
+CIS 361
+*************************************************/
 #include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,14 +16,6 @@ int main(int argc, char *argv[])
 {
     SO_List *list = (SO_List*)malloc(sizeof(SO_List));
     initialize(list);
-    //insert(list, "TestA");
-    //print_list(list);
-    //insert(list, "TestB");
-    //print_list(list);
-    //insert(list, "TestC");
-    //print_list(list);
-    //insert(list, "TestC");
-    //print_list(list);
     FILE *fp;
     fp = fopen(argv[1],"r");
     if(fp < 0)
@@ -26,13 +26,28 @@ int main(int argc, char *argv[])
     char *identifier = "";
     identifier = (char*)malloc(sizeof(char)*100);
     int len;
+    bool comment = false;
+    bool literal = false;
 
     while(!feof(fp))
     {
         char ch = fgetc(fp);
+        if(ch == '/')
+        {
+            comment = !comment;
+        }
+        if(ch == '\"')
+        {
+            literal = !literal;
+        }
+        if(ch == '\n')
+        {
+            comment = false;
+            literal = false;
+        }
         switch (State) {
             case SPACE:
-                if(isalpha(ch) != 0)
+                if(isalpha(ch) != 0 && !comment && !literal)
                 {
                     len = strlen(identifier);
                     identifier[len] = ch;
@@ -50,7 +65,6 @@ int main(int argc, char *argv[])
                     State = SPACE;
                     len = 0;
                     identifier = malloc(100*sizeof(char));
-
                 }
                 break;
         }
