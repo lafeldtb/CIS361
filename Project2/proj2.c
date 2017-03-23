@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
         }
         switch (State) {
             case SPACE:
-                if(isalpha(ch) != 0 && !comment && !literal)
+                if((isalpha(ch) != 0 || ch == '_') && !comment && !literal)
                 {
                     len = strlen(identifier);
                     identifier[len] = ch;
