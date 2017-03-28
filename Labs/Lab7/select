@@ -1,0 +1,10 @@
+#! /bin/bash
+# takes input and prints to stdout the files and not dirs
+
+while read name
+do
+	if test -f $name 
+	then
+		echo $name
+	fi
+done

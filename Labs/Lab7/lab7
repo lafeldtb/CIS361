@@ -1,0 +1,14 @@
+#! /bin/bash
+
+# read in a file and create directories and files
+# example: cis162 proj1.c
+# creates cis162/proj1.c
+while read line
+do
+	set $line
+	echo $1
+	find $1/
+	mkdir -p $1/
+	touch $1/$2
+done < classes.txt
+
