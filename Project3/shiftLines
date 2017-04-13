@@ -1,0 +1,20 @@
+#!/bin/bash
+
+while IFT=' \n\t' read line;
+do
+	data=$line
+	set $data
+	count=$#
+	x=$1
+	while [ $count -ne 0 ]
+	do
+		set $data
+		x=$1
+		shift
+		a=$(echo $* | tr -d '\n\r')
+		b=$(echo $x | tr -d '\n\r')
+		data=$(echo $a $b)
+		echo $data
+		count=$(expr $count - 1)
+	done
+done < $1
