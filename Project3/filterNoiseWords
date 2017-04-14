@@ -2,4 +2,11 @@
 
 data=$(sort | uniq)
 
+#echo "$data" | sed '/^of /d'
 
+while read word;
+do
+	data=$(echo "$data" | sed "/^$word /d")
+done < $1
+
+echo "$data"
