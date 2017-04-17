@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo $1
 while IFT=' \n\t' read line;
 do
 	data=$line

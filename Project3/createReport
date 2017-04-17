@@ -1,0 +1,13 @@
+#!/bin/bash
+
+data=$(cat)
+
+infile=$(echo "$data" | sed -n 1p)
+data=$(echo "$data" | sed "1,2d" )
+count=$(echo "$data" | wc -l)
+incount=$(cat "$infile" | wc -l )
+
+echo "$data
+
+The number of lines in the input file $infile is $incount
+echo The number of lines in the output file $1 is $count " > $1

@@ -1,12 +1,17 @@
 #!/bin/bash
 
-data=$(sort | uniq)
 
-#echo "$data" | sed '/^of /d'
+data=$(cat)
+#first=$(sed 1d "$data")
+#echo "$first"
+infile=$(echo "$data" | sed -n 1p)
+
+data=$(echo "$data" | sed "s/$infile//g" | sort | uniq)
 
 while read word;
 do
-	data=$(echo "$data" | sed "/^$word /d")
+	data=$(echo "$data" | sed "/^$word /Id")
 done < $1
 
+echo "$infile"
 echo "$data"
