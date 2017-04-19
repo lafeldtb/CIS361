@@ -1,0 +1,29 @@
+#! /bin/bash
+
+if [ -z "$1" ] 
+then
+	echo "no unzip folder given"
+	echo "Usage: script folderToUnzip"
+	exit 2
+fi
+
+source=$1
+
+# Unzip folder and get new name
+unzip $source
+source="${source%.*}"
+
+# Read in each filename in folder
+for file in "$source"/*;
+do
+	set student
+	set fileName
+    read student fileName <<< $(gawk -F_ '{printf "%s %s", $2, $5}' <<< "${file}")
+	mkdir -p "$source"/"$student"
+	if [ -n "$fileName" ] 
+	then
+		mv "$file" "$source"/"$student"/"$fileName"
+	fi
+done
+
+#rm -r "cis361p4"
