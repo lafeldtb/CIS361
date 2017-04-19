@@ -3,14 +3,16 @@
 if [ -z "$1" ] 
 then
 	echo "no unzip folder given"
-	echo "Usage: script folderToUnzip"
+	echo "Usage: make folderToUnzip"
 	exit 2
 fi
 
 source=$1
 
+echo "starting..."
+
 # Unzip folder and get new name
-unzip $source
+unzip -q $source
 source="${source%.*}"
 
 # Read in each filename in folder
@@ -23,7 +25,19 @@ do
 	if [ -n "$fileName" ] 
 	then
 		mv "$file" "$source"/"$student"/"$fileName"
+	else
+		mv "$file" "$source"/"$student"/"memo.txt"
 	fi
 done
 
-#rm -r "cis361p4"
+echo "created folder structure, now testing students..."
+
+report="report"
+echo "Running tests for students" > "$report"
+for folder in "$source"/*
+do
+	make -f ../../makefile -C "$folder" >> "$report"
+	make test -f ../../makefile -C "$folder" >> "$report"
+done
+
+echo "done"

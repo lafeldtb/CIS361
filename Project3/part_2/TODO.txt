@@ -1,3 +1,0 @@
-Unzip into user defined directory
-Create directory for every student contianing shortned filename
-Create a report
